@@ -53,11 +53,8 @@ namespace Diplom_main {
                     }
                 }
 
-                P_Player.calculateNextWantedPoint(E_Player);
-                E_Player.calculateNextWantedPoint(P_Player);
-
-                P_Player.moveToWantedPoint(stepSize);
-                E_Player.moveToWantedPoint(stepSize);
+                P_Player.makeNextMove(stepSize, E_Player);
+                E_Player.makeNextMove(stepSize, P_Player);
 
 
                 if (isEscaperCaught()) {

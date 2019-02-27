@@ -17,7 +17,29 @@ namespace Diplom_main {
         protected bool isInerted = false;
 
         //public методы игры
-        public void moveToWantedPoint(double stepSize) {
+        public void makeNextMove(double stepSize, Player opponent) {
+            moveToWantedPoint(stepSize, getNextWantedPoint(opponent));
+        }
+        public abstract double[] getNextWantedPoint(Player opponent);
+        public double[,] getRadiusPoints(double lengthToPointCoeff = 1) {
+
+            double[,] result = new double[2, 2];
+            double[] radPoint1 = new double[2] {
+                    createVector(getSpeedDirection() + 90, radius*lengthToPointCoeff)[0] + coordinates[0],
+                    createVector(getSpeedDirection() + 90, radius*lengthToPointCoeff)[1] + coordinates[1] };
+
+            double[] radPoint2 = new double[2] {
+                    createVector(getSpeedDirection() + 90, radius*lengthToPointCoeff)[0] + coordinates[0],
+                    createVector(getSpeedDirection() + 90, radius*lengthToPointCoeff)[1] + coordinates[1] };
+
+            result[0, 0] = radPoint1[0];
+            result[0, 1] = radPoint1[1];
+            result[1, 0] = radPoint1[0];
+            result[1, 1] = radPoint1[1];
+
+            return result;
+        }
+        private void moveToWantedPoint(double stepSize, double[] wantedPoint) {
 
             double[] JVector = {wantedPoint[0] - coordinates[0],
                                 wantedPoint[1] - coordinates[1]};
@@ -52,31 +74,11 @@ namespace Diplom_main {
             coordinates[1] += speedVector[1] * stepSize;
         }
 
-        public abstract void calculateNextWantedPoint(Player opponent);
-        public double[,] getRadiusPoints(double lengthToPointCoeff = 1) {
-
-            double[,] result = new double[2, 2];
-            double[] radPoint1 = new double[2] {
-                    createVector(getSpeedDirection() + 90, radius*lengthToPointCoeff)[0] + coordinates[0],
-                    createVector(getSpeedDirection() + 90, radius*lengthToPointCoeff)[1] + coordinates[1] };
-
-            double[] radPoint2 = new double[2] {
-                    createVector(getSpeedDirection() + 90, radius*lengthToPointCoeff)[0] + coordinates[0],
-                    createVector(getSpeedDirection() + 90, radius*lengthToPointCoeff)[1] + coordinates[1] };
-
-            result[0, 0] = radPoint1[0];
-            result[0, 1] = radPoint1[1];
-            result[1, 0] = radPoint1[0];
-            result[1, 1] = radPoint1[1];
-
-            return result;
-        }
-
         //геттеры
         public double getRadius() {
             return radius;
         }
-        public double getSpeedLength() {
+        public double getSpeedVectorLength() {
             return modOfVector(speedVector);
         }
         public double getSpeedDirection() {
@@ -84,6 +86,9 @@ namespace Diplom_main {
         }
         public double[] getCoordinates() {
             return coordinates;
+        }
+        public double[] getSpeedVector() {
+            return speedVector;
         }
         public bool getIsInerted() {
             return isInerted;
@@ -142,7 +147,6 @@ namespace Diplom_main {
             inputVector[0] = buff1;
             inputVector[1] = buff2;
         }
-
         //создание вектора
         public static double[] createVector(double degAngle, double length) {
             double[] result = new double[2];
@@ -179,7 +183,6 @@ namespace Diplom_main {
 
             else return new double[] { 0, 0 };
         }
-
         //статические вспомогательные функции
         public static double modOfVector(double[] vector) {
             return Math.Sqrt(Math.Pow(vector[0], 2) + Math.Pow(vector[1], 2));
@@ -190,7 +193,6 @@ namespace Diplom_main {
         public static double degToRad(double deg) {
             return (PI * deg) / 180;
         }
-
         //возвращает положительный угол в градусах
         public static double getAngle(double[] vector) {
 

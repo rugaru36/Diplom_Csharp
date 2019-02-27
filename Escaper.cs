@@ -9,11 +9,11 @@ namespace Diplom_main {
 
         private byte numOfRadCircle = 0;
 
-        public override void calculateNextWantedPoint(Player pursuiter) {
+        public override double[] getNextWantedPoint(Player pursuiter) {
 
             double pRadius = pursuiter.getRadius();
             double pDir = pursuiter.getSpeedDirection();
-            double pSpeed = pursuiter.getSpeedLength();
+            double pSpeed = pursuiter.getSpeedVectorLength();
             double[] pCoordinates = pursuiter.getCoordinates();
 
             double[] LVector = new double[2] {
@@ -23,21 +23,18 @@ namespace Diplom_main {
 
             //Если далеко - убегающий бежит прямо
             if (modOfVector(LVector) > 10) {
-                wantedPoint = new double[2] {
+                return new double[2] {
                     coordinates[0] + speedVector[0],
                     coordinates[1] + speedVector[1]
                 };
-
-                return;
             }
 
             //средняя дистанция
             else if (modOfVector(LVector) <= 10 && modOfVector(LVector) > pRadius / 2) {
-                wantedPoint = new double[2] {
+                return new double[2] {
                     coordinates[0] + LVector[0],
                     coordinates[1] + LVector[1]
                 };
-                return;
             }
 
             //близкая дистанция
@@ -54,14 +51,16 @@ namespace Diplom_main {
                 if (modOfVector(vectorToPoint1) <= modOfVector(vectorToPoint2) || numOfRadCircle == 1) {
                     //двигаемся к radPoint1
                     numOfRadCircle = 1;
-                    wantedPoint = new double[2] {radPoints[0,0], radPoints[0, 1] };
+                    return new double[2] {radPoints[0,0], radPoints[0, 1] };
                 }
                 //двигаемся к radPoint2
                 else {
                     numOfRadCircle = 2;
-                    wantedPoint = new double[2] { radPoints[1, 0], radPoints[1, 1] };
+                    return new double[2] { radPoints[1, 0], radPoints[1, 1] };
                 }
             }
+
+            return new double[] { 0, 0 };
         }
     }
 }
