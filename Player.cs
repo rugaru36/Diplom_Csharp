@@ -31,7 +31,7 @@ namespace Diplom_main {
             else if (isInerted) {
                 double currentDirection = getAngle(speedVector);
 
-                //if (currentDirection > 180) currentDirection -= 360;
+                if (currentDirection > 180) currentDirection -= 360;
 
                 double diffAngle = currentDirection - wantedDirection;
 
@@ -148,7 +148,7 @@ namespace Diplom_main {
             if (length == 0) return result;
 
             //получим положительный угол, не больше 360
-            while (Math.Abs(degAngle) >= 360) {
+            while (Math.Abs(degAngle) >= 360 || degAngle < 0) {
                 if (degAngle < 0) degAngle += 360;
                 else degAngle -= 360;
             }

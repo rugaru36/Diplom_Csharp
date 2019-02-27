@@ -11,7 +11,7 @@
                   Height="207" Margin="10,10,0,0" VerticalAlignment="Top" Width="200">
 
             <TextBox x:Name="P_InputXCoordinate" HorizontalAlignment="Left" 
-                     Height="22" Margin="11,27,0,0" TextWrapping="Wrap" Text="10" 
+                     Height="22" Margin="11,27,0,0" TextWrapping="Wrap" Text="-10" 
                      VerticalAlignment="Top" Width="70" FontSize="14"
                      GotFocus="setPrevValue"
                      LostFocus="checkInputDataTypes"/>
@@ -32,7 +32,7 @@
             Height="207" Margin="218,10,0,0" VerticalAlignment="Top" Width="200">
 
             <TextBox x:Name="E_InputXCoordinate" HorizontalAlignment="Left" 
-                Height="22" Margin="10,27,0,0" TextWrapping="Wrap" Text="5" 
+                Height="22" Margin="10,27,0,0" TextWrapping="Wrap" Text="2" 
                 VerticalAlignment="Top" Width="70" FontSize="14"
                 GotFocus="setPrevValue"
                 LostFocus="checkInputDataTypes"/>
@@ -67,7 +67,7 @@
                 LostFocus="checkInputDataTypes" TextAlignment="Justify"/>
         <TextBox x:Name="E_InputYCoordinate"
                 HorizontalAlignment="Left" Height="22" Margin="336,53,0,0"
-                TextWrapping="Wrap" Text="-10" VerticalAlignment="Top" Width="70" FontSize="14"
+                TextWrapping="Wrap" Text="13" VerticalAlignment="Top" Width="70" FontSize="14"
                 GotFocus="setPrevValue"
                 LostFocus="checkInputDataTypes"/>
         <TextBox x:Name="E_InputSpeedVectorLength" HorizontalAlignment="Left" 

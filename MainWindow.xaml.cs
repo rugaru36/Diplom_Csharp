@@ -177,15 +177,15 @@ namespace Diplom_main {
         private void button_Click(object sender, RoutedEventArgs e) {
             checkInputData();
 
-            if (!this.isDataCorrect) {
-                MessageBox.Show(this.errorMessage);
+            if (!isDataCorrect) {
+                MessageBox.Show(errorMessage);
                 return;
             }
 
-            this.setDataBeforeStart();
+            setDataBeforeStart();
             Label_outputResult.Content = "";
 
-            if (this.isDataCorrect) {
+            if (isDataCorrect) {
                 Label_outputResult.Content = game.iterationsProcess();
             }
 
