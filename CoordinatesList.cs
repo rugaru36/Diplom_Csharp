@@ -37,6 +37,7 @@ namespace Diplom_main {
         public void normalizeCoordinates(int width, int height,
                                          double commonMin_x, double commonMin_y,
                                          double commonMax_x, double commonMax_y) {
+
             double whatToAdd_x = 0, whatToAdd_y = 0, whatToMultiply = 1;
             ListElement currentElement = headElement;
 
@@ -53,7 +54,8 @@ namespace Diplom_main {
             if (height / (commonMax_y + whatToAdd_y) < width / (commonMax_x + whatToAdd_x))
                 whatToMultiply = height / (commonMax_y + whatToAdd_y);
 
-            else whatToMultiply = width / (commonMax_x + whatToAdd_x);
+            else
+                whatToMultiply = width / (commonMax_x + whatToAdd_x);
 
             while (currentElement.next != null) {
                 currentElement.setNewValue(new double[] {

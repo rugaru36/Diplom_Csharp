@@ -30,6 +30,9 @@ namespace Diplom_main {
             //инерция
             else if (isInerted) {
                 double currentDirection = getAngle(speedVector);
+
+                //if (currentDirection > 180) currentDirection -= 360;
+
                 double diffAngle = currentDirection - wantedDirection;
 
                 while (Math.Abs(diffAngle) >= 360) {
