@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 
 
 namespace Diplom_main {
@@ -39,19 +39,19 @@ namespace Diplom_main {
                     if (diffAngle < 0) diffAngle += 360;
                     else if (diffAngle > 0) diffAngle -= 360;
                 }
-                
-                if(Math.Abs(diffAngle) <= maxAngle) {
+
+                if (Math.Abs(diffAngle) <= maxAngle) {
                     setSpeedVectorDirection(wantedDirection);
                 }
 
-                else if(Math.Abs(diffAngle) > maxAngle) {
-                    setSpeedVectorDirection(currentDirection - (Math.Sign(diffAngle)*maxAngle));
+                else if (Math.Abs(diffAngle) > maxAngle) {
+                    setSpeedVectorDirection(currentDirection - (Math.Sign(diffAngle) * maxAngle));
                 }
             }
-
             coordinates[0] += speedVector[0] * stepSize;
             coordinates[1] += speedVector[1] * stepSize;
         }
+
         public abstract void calculateNextWantedPoint(Player opponent);
         public double[,] getRadiusPoints(double lengthToPointCoeff = 1) {
 
@@ -129,7 +129,10 @@ namespace Diplom_main {
             maxAngle = speed / radius;
         }
 
-        //вспомогательные функции
+
+        /*вспомогательные функции*/
+
+        //поворот вектора скорости
         public static void turnVector(double degAngle, ref double[] inputVector) {
             double radAngle = degToRad(degAngle);
 
@@ -140,10 +143,9 @@ namespace Diplom_main {
             inputVector[1] = buff2;
         }
 
+        //создание вектора
         public static double[] createVector(double degAngle, double length) {
             double[] result = new double[2];
-            result[0] = 0;
-            result[1] = 0;
 
             if (length == 0) return result;
 
@@ -153,30 +155,29 @@ namespace Diplom_main {
                 else degAngle -= 360;
             }
             //первая четверть
-            if (degAngle >= 0 && degAngle <= 90) {
-                result[0] = Math.Sin(degToRad(90 - degAngle)) * length;
-                result[1] = Math.Sin(degToRad(degAngle)) * length;
-                return result;
-            }
+            if (degAngle >= 0 && degAngle <= 90)
+                return new double[] { Math.Sin(degToRad(90 - degAngle)) * length,
+                                Math.Sin(degToRad(degAngle)) * length };
+
             //вторая четверть
-            else if (degAngle > 90 && degAngle < 180) {
-                result[0] = (-1) * Math.Sin(degToRad(-90 - degAngle)) * length;
-                result[1] = Math.Sin(degToRad((180 - degAngle))) * length;
-                return result;
-            }
+            else if (degAngle > 90 && degAngle < 180)
+                return new double[] {
+                    Math.Sin(degToRad(-90 - degAngle)) * length * (-1),
+                    Math.Sin(degToRad((180 - degAngle))) * length};
             //третья четверть
-            else if (degAngle >= 180 && degAngle <= 270) {
-                result[0] = (-1) * Math.Sin(degToRad(-90 - degAngle)) * length;
-                result[1] = (-1) * Math.Sin(degToRad((degAngle - 180))) * length;
-                return result;
-            }
+            else if (degAngle >= 180 && degAngle <= 270)
+                return new double[] {
+                    Math.Sin(degToRad(-90 - degAngle)) * length * (-1),
+                    Math.Sin(degToRad((degAngle - 180))) * length * (-1)
+                };
             //четвертая четверть
-            else if (degAngle > 270 && degAngle < 360) {
-                result[0] = Math.Sin(degToRad(90 - degAngle)) * length;
-                result[1] = (-1) * Math.Sin(degToRad((360 - degAngle))) * length;
-                return result;
-            }
-            else return result;
+            else if (degAngle > 270 && degAngle < 360)
+                return new double[] {
+                    Math.Sin(degToRad(90 - degAngle)) * length,
+                    Math.Sin(degToRad((360 - degAngle))) * length * (-1)
+                };
+
+            else return new double[] { 0, 0 };
         }
 
         //статические вспомогательные функции

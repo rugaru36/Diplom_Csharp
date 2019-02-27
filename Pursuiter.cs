@@ -11,6 +11,8 @@ namespace Diplom_main {
 
             wantedPoint[0] = eCoordinates[0];
             wantedPoint[1] = eCoordinates[1];
+
+            return;
         }
     }
 }

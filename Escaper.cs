@@ -9,13 +9,6 @@ namespace Diplom_main {
 
         private byte numOfRadCircle = 0;
 
-        //на будущее - получить радиус преследователя для более сложного алгоритма
-        //public void setPursuitersData(Player Pursuiter) {
-        //    pRadius = Pursuiter.getRadius();
-        //    pDir = Pursuiter.getSpeedDirection();
-        //    pSpeed = Pursuiter.getSpeedLength();
-        //}
-
         public override void calculateNextWantedPoint(Player pursuiter) {
 
             double pRadius = pursuiter.getRadius();
