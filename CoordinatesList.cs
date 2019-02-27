@@ -34,5 +34,34 @@ namespace Diplom_main {
             }
             tailElement = newElement;
         }
+        public void normalizeCoordinates(int width, int height,
+                                         double commonMin_x, double commonMin_y,
+                                         double commonMax_x, double commonMax_y) {
+            double whatToAdd_x = 0, whatToAdd_y = 0, whatToMultiply = 1;
+            ListElement currentElement = headElement;
+
+            //чтобы не было отрицательных значений
+            if (commonMin_x < 0) {
+                whatToAdd_x = Math.Abs(commonMin_x);
+                min_x = 0;
+            }
+            if (commonMin_y < 0) {
+                whatToAdd_y = Math.Abs(commonMin_y);
+                min_y = 0;
+            }
+
+            if (height / (commonMax_y + whatToAdd_y) < width / (commonMax_x + whatToAdd_x))
+                whatToMultiply = height / (commonMax_y + whatToAdd_y);
+
+            else whatToMultiply = width / (commonMax_x + whatToAdd_x);
+
+            while (currentElement.next != null) {
+                currentElement.setNewValue(new double[] {
+                    (currentElement.getValue()[0]+whatToAdd_x)*whatToMultiply,
+                    (currentElement.getValue()[1]+whatToAdd_y)*whatToMultiply*(-1)
+                });
+                currentElement = currentElement.next;
+            }
+        }
     }
 }
