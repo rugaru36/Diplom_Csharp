@@ -51,16 +51,19 @@ namespace Diplom_main {
                 min_y = 0;
             }
 
-            if (height / (commonMax_y + whatToAdd_y) < width / (commonMax_x + whatToAdd_x))
-                whatToMultiply = height / (commonMax_y + whatToAdd_y);
+            double verticalCoeff = height / (commonMax_y + whatToAdd_y);
+            double horizontalCoeff = width / (commonMax_x + whatToAdd_x);
+
+            if (verticalCoeff < horizontalCoeff)
+                whatToMultiply = verticalCoeff;
 
             else
-                whatToMultiply = width / (commonMax_x + whatToAdd_x);
+                whatToMultiply = horizontalCoeff;
 
             while (currentElement.next != null) {
                 currentElement.setNewValue(new double[] {
-                    (currentElement.getValue()[0]+whatToAdd_x)*whatToMultiply,
-                    (currentElement.getValue()[1]+whatToAdd_y)*whatToMultiply*(-1)
+                    (currentElement.getValue()[0] + whatToAdd_x) * whatToMultiply,
+                    (currentElement.getValue()[1] + whatToAdd_y) * whatToMultiply * (-1)
                 });
                 currentElement = currentElement.next;
             }

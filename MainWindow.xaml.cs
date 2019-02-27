@@ -23,7 +23,7 @@ namespace Diplom_main {
         private bool isDataCorrect = true;
         private string errorMessage = "";
         private Game game;
-        private int graphStart_x, graphEnd_x, graphBottom, graphTop, /*graphMiddle_y,*/ graphHeight, graphWidth;
+        private int graphLeft, graphRight, graphBottom, graphTop, /*graphMiddle_y,*/ graphHeight, graphWidth;
         private Polyline p_line, e_line;
         //МЕТОДЫ
 
@@ -31,8 +31,8 @@ namespace Diplom_main {
             InitializeComponent();
             game = new Game();
 
-            graphStart_x = Convert.ToInt32(graphGroup.Margin.Left) + 5;
-            graphEnd_x = graphStart_x + Convert.ToInt32(graphGroup.Width) - 5;
+            graphLeft = Convert.ToInt32(graphGroup.Margin.Left) + 5;
+            graphRight = graphLeft + Convert.ToInt32(graphGroup.Width) - 5;
 
             //graphMiddle_y = Convert.ToInt32(graphGroup.Margin.Top + (graphGroup.Height / 2));
             graphWidth = Convert.ToInt32(graphGroup.Width) - 10;
@@ -72,11 +72,11 @@ namespace Diplom_main {
 
             while (current_pPoint.next != null && current_ePoint.next != null) {
                 p_line.Points.Add(new Point(
-                    current_pPoint.getValue()[0] + graphStart_x,
+                    current_pPoint.getValue()[0] + graphLeft,
                     current_pPoint.getValue()[1] + graphBottom));
 
                 e_line.Points.Add(new Point(
-                    current_ePoint.getValue()[0] + graphStart_x,
+                    current_ePoint.getValue()[0] + graphLeft,
                     current_ePoint.getValue()[1] + graphBottom));
 
                 current_pPoint = current_pPoint.next;

@@ -47,10 +47,10 @@ namespace Diplom_main {
             double wantedDirection = getAngle(JVector);
 
             //безынерционный объект
-            if (!isInerted) setSpeedVectorDirection(wantedDirection);
+            if (!getIsInerted()) setSpeedVectorDirection(wantedDirection);
 
             //инерция
-            else if (isInerted) {
+            else if (getIsInerted()) {
                 double currentDirection = getAngle(speedVector);
 
                 if (currentDirection > 180) currentDirection -= 360;
@@ -91,29 +91,24 @@ namespace Diplom_main {
             return speedVector;
         }
         public bool getIsInerted() {
-            return isInerted;
+            return radius > 0.1;
         }
 
         //сеттеры
         public void setRadius(double newRadius) {
             radius = newRadius;
 
-            if (radius == 0) {
-                isInerted = false;
-                maxAngle = 0;
-                return;
+            if (radius > 0) {
+                maxAngle = modOfVector(speedVector) / radius;
             }
 
-            isInerted = true;
-            maxAngle = modOfVector(speedVector) / radius;
         }
         public void setSpeedVectorLength(double newSpeed) {
             speedVector = createVector(getSpeedDirection(), newSpeed);
-            if (radius == 0) {
-                maxAngle = 0;
+            if (radius > 0) {
+                maxAngle = newSpeed / radius;
                 return;
             }
-            maxAngle = newSpeed / radius;
         }
         public void setSpeedVectorDirection(double newDirection) {
             speedVector = createVector(newDirection, modOfVector(speedVector));

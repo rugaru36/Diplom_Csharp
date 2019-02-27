@@ -28,6 +28,11 @@ namespace Diplom_main {
             E_PlayerCoordinatesList = new CoordinatesList();
             P_PlayerCoordinatesList = new CoordinatesList();
 
+            min_x = P_Player.getCoordinates()[0];
+            max_x = P_Player.getCoordinates()[0];
+            min_y = P_Player.getCoordinates()[1];
+            max_y = P_Player.getCoordinates()[1];
+
             for (int i = 0; i < iterationsQuantity; i++) {
 
                 //для построения графиков
@@ -37,8 +42,8 @@ namespace Diplom_main {
 
                     E_PlayerCoordinatesList.addElement(new double[] {
                         E_Player.getCoordinates()[0], E_Player.getCoordinates()[1] });
-                    
-                    if(min_x > Math.Min(P_PlayerCoordinatesList.min_x, E_PlayerCoordinatesList.min_x)) {
+
+                    if (min_x > Math.Min(P_PlayerCoordinatesList.min_x, E_PlayerCoordinatesList.min_x)) {
                         min_x = Math.Min(P_PlayerCoordinatesList.min_x, E_PlayerCoordinatesList.min_x);
                     }
                     if (min_y > Math.Min(P_PlayerCoordinatesList.min_y, E_PlayerCoordinatesList.min_y)) {
@@ -79,33 +84,18 @@ namespace Diplom_main {
         }
         private bool isEscaperInRadCurcle() {
 
-            if (!this.P_Player.getIsInerted()) return false;
+            if (!P_Player.getIsInerted()) return false;
 
-            //вектора, ведущие от преследователя до центров окружностей радиусов
-            double[] toPoint1 = Player.createVector(this.P_Player.getSpeedDirection() + 90, this.P_Player.getRadius());
-            double[] toPoint2 = Player.createVector(this.P_Player.getSpeedDirection() - 90, this.P_Player.getRadius());
+            double[,] radCenterPoints = P_Player.getRadiusPoints();
 
-            double a = this.P_Player.getSpeedDirection();
-            a = this.P_Player.getRadius();
-            double[] b = E_Player.getCoordinates();
+            double[] buffVector1 = { radCenterPoints[0,0] - E_Player.getCoordinates()[0],
+                                    radCenterPoints[0,1] - E_Player.getCoordinates()[1]};
 
-            double[] radCenterPoint1 = {
-                this.P_Player.getCoordinates()[0] + toPoint1[0],
-                this.P_Player.getCoordinates()[1] + toPoint1[1]
-            };
-            double[] radCenterPoint2 = {
-                this.P_Player.getCoordinates()[0] + toPoint2[0],
-                this.P_Player.getCoordinates()[1] + toPoint2[1]
-            };
+            double[] buffVector2 = { radCenterPoints[1,0] - E_Player.getCoordinates()[0],
+                                    radCenterPoints[1,1] - E_Player.getCoordinates()[1]};
 
-            double[] buffVector1 = { radCenterPoint1[0] - this.E_Player.getCoordinates()[0],
-                                    radCenterPoint1[1] - this.E_Player.getCoordinates()[1]};
-
-            double[] buffVector2 = { radCenterPoint1[0] - this.E_Player.getCoordinates()[0],
-                                    radCenterPoint1[1] - this.E_Player.getCoordinates()[1]};
-
-            bool isInFirstRad = Player.modOfVector(buffVector1) < this.P_Player.getRadius() * 0.8;
-            bool isInSecondRad = Player.modOfVector(buffVector2) < this.P_Player.getRadius() * 0.8;
+            bool isInFirstRad = Player.modOfVector(buffVector1) < P_Player.getRadius() * 0.8;
+            bool isInSecondRad = Player.modOfVector(buffVector2) < P_Player.getRadius() * 0.8;
 
             return isInFirstRad || isInSecondRad;
         }
