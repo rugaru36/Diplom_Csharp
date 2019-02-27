@@ -49,7 +49,25 @@ namespace Diplom_main {
             coordinates[0] += speedVector[0] * stepSize;
             coordinates[1] += speedVector[1] * stepSize;
         }
-        public abstract void calculateNextWantedPoint(double[] coordinates);
+        public abstract void calculateNextWantedPoint(Player opponent);
+        public double[,] getRadiusPoints(double lengthToPointCoeff = 1) {
+
+            double[,] result = new double[2, 2];
+            double[] radPoint1 = new double[2] {
+                    createVector(getSpeedDirection() + 90, radius*lengthToPointCoeff)[0] + coordinates[0],
+                    createVector(getSpeedDirection() + 90, radius*lengthToPointCoeff)[1] + coordinates[1] };
+
+            double[] radPoint2 = new double[2] {
+                    createVector(getSpeedDirection() + 90, radius*lengthToPointCoeff)[0] + coordinates[0],
+                    createVector(getSpeedDirection() + 90, radius*lengthToPointCoeff)[1] + coordinates[1] };
+
+            result[0, 0] = radPoint1[0];
+            result[0, 1] = radPoint1[1];
+            result[1, 0] = radPoint1[0];
+            result[1, 1] = radPoint1[1];
+
+            return result;
+        }
 
         //геттеры
         public double getRadius() {

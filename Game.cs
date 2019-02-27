@@ -53,10 +53,8 @@ namespace Diplom_main {
                     }
                 }
 
-                E_Player.setPursuitersData(P_Player);
-
-                P_Player.calculateNextWantedPoint(E_Player.getCoordinates());
-                E_Player.calculateNextWantedPoint(P_Player.getCoordinates());
+                P_Player.calculateNextWantedPoint(E_Player);
+                E_Player.calculateNextWantedPoint(P_Player);
 
                 P_Player.moveToWantedPoint(stepSize);
                 E_Player.moveToWantedPoint(stepSize);

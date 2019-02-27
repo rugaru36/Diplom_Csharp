@@ -12,7 +12,7 @@ namespace Diplom_main {
         public ListElement(double[] data) {
             coordinates = data;
         }
-        public void setNewValueInExistingElement(double[] data) {
+        public void setNewValue(double[] data) {
             this.coordinates = data;
         }
         public double[] getValue() {

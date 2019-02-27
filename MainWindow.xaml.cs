@@ -23,7 +23,7 @@ namespace Diplom_main {
         private bool isDataCorrect = true;
         private string errorMessage = "";
         private Game game;
-        private int graphStart_x, graphEnd_x, graphStart_y, graphEnd_y, graphMiddle_y;
+        private int graphStart_x, graphEnd_x, graphStart_y, graphEnd_y, /*graphMiddle_y,*/ graphHeight, graphWidth;
         private Polyline p_line, e_line;
         //МЕТОДЫ
 
@@ -31,12 +31,15 @@ namespace Diplom_main {
             InitializeComponent();
             game = new Game();
 
-            graphStart_x = Convert.ToInt32(graphGroup.Margin.Left);
-            graphEnd_x = graphStart_x + Convert.ToInt32(graphGroup.Width);
+            graphStart_x = Convert.ToInt32(graphGroup.Margin.Left) + 5;
+            graphEnd_x = graphStart_x + Convert.ToInt32(graphGroup.Width) - 5;
 
-            graphMiddle_y = Convert.ToInt32(graphGroup.Margin.Top + (graphGroup.Height / 2));
-            graphStart_y = Convert.ToInt32(graphGroup.Margin.Top);
-            graphEnd_y = graphStart_y + Convert.ToInt32(graphGroup.Height);
+            //graphMiddle_y = Convert.ToInt32(graphGroup.Margin.Top + (graphGroup.Height / 2));
+            graphWidth = Convert.ToInt32(graphGroup.Width) - 10;
+            graphHeight = Convert.ToInt32(graphGroup.Height) - 10;
+
+            graphEnd_x = Convert.ToInt32(graphGroup.Margin.Top) + 5;
+            graphStart_y = graphStart_y + Convert.ToInt32(graphGroup.Height) - 5;
         }
         private void setPrevValue(object sender, RoutedEventArgs e) {
             TextBox currentTb = (TextBox)sender;
@@ -49,7 +52,11 @@ namespace Diplom_main {
                 mainGrid.Children.Remove(e_line);
             }
 
-            double localGraphMiddle = graphMiddle_y;
+            game.E_PlayerCoordinatesList.normalizeCoordinates(graphWidth, graphHeight, 
+                                                              game.min_x, game.min_y, game.max_x, game.max_y);
+
+            game.P_PlayerCoordinatesList.normalizeCoordinates(graphWidth, graphHeight,
+                                                              game.min_x, game.min_y, game.max_x, game.max_y);
 
             p_line = new Polyline();
             e_line = new Polyline();
@@ -63,37 +70,14 @@ namespace Diplom_main {
             ListElement current_pPoint = game.P_PlayerCoordinatesList.headElement;
             ListElement current_ePoint = game.E_PlayerCoordinatesList.headElement;
 
-            double addX = 0;
-            double addY = 0;
-
-            if (game.min_y < 0) addY = Math.Abs(game.min_y);
-            if (game.min_x < 0) addX = Math.Abs(game.min_x);
-
-            double multiplyX = (graphEnd_x - graphStart_x) / (game.max_x + addX - game.min_x);
-            double multiplyY = (graphEnd_y - graphStart_y) / (game.max_y + addY - game.min_y);
-
-            bool a = game.max_x - game.min_x > game.max_y - game.min_y;
-
-
-            if (game.max_x + addX - game.min_x + addX > game.max_y - game.min_y) multiplyY = multiplyX;
-            else multiplyX = multiplyY;
-
-            while (((game.max_y + addY) * multiplyY * (-1)) + localGraphMiddle > graphEnd_y) {
-                localGraphMiddle--;
-            }
-
-            while (((game.max_y + addY) * multiplyY * (-1)) + localGraphMiddle < graphStart_y) {
-                localGraphMiddle++;
-            }
-
             while (current_pPoint.next != null && current_ePoint.next != null) {
                 p_line.Points.Add(new Point(
-                    ((current_pPoint.getValue()[0] + addX) * multiplyX + graphStart_x),
-                    ((current_pPoint.getValue()[1] + addY) * multiplyY * (-1)) + localGraphMiddle));
+                    current_pPoint.getValue()[0] + graphStart_x,
+                    current_pPoint.getValue()[1] + graphStart_y));
 
                 e_line.Points.Add(new Point(
-                    ((current_ePoint.getValue()[0] + addX) * multiplyX + graphStart_x),
-                    ((current_ePoint.getValue()[1] + addY) * multiplyY * (-1)) + localGraphMiddle));
+                    current_ePoint.getValue()[0] + graphStart_x,
+                    current_ePoint.getValue()[1] + graphStart_y));
 
                 current_pPoint = current_pPoint.next;
                 current_ePoint = current_ePoint.next;

@@ -6,19 +6,22 @@ using System.Threading.Tasks;
 
 namespace Diplom_main {
     class Escaper : Player {
-        private double pRadius;
-        private double pSpeed;
-        private double pDir;
+
         private byte numOfRadCircle = 0;
 
         //на будущее - получить радиус преследователя для более сложного алгоритма
-        public void setPursuitersData(Player Pursuiter) {
-            pRadius = Pursuiter.getRadius();
-            pDir = Pursuiter.getSpeedDirection();
-            pSpeed = Pursuiter.getSpeedLength();
-        }
+        //public void setPursuitersData(Player Pursuiter) {
+        //    pRadius = Pursuiter.getRadius();
+        //    pDir = Pursuiter.getSpeedDirection();
+        //    pSpeed = Pursuiter.getSpeedLength();
+        //}
 
-        public override void calculateNextWantedPoint(double[] pCoordinates) {
+        public override void calculateNextWantedPoint(Player pursuiter) {
+
+            double pRadius = pursuiter.getRadius();
+            double pDir = pursuiter.getSpeedDirection();
+            double pSpeed = pursuiter.getSpeedLength();
+            double[] pCoordinates = pursuiter.getCoordinates();
 
             double[] LVector = new double[2] {
                 coordinates[0] - pCoordinates[0],
@@ -45,31 +48,25 @@ namespace Diplom_main {
             }
 
             //близкая дистанция
-            else if (modOfVector(LVector) <= this.pRadius / 2) {
+            else if (modOfVector(LVector) <= pRadius / 2) {
                 //расстояние от координат преследователя до искомой точки
                 double lengthToPoint = pRadius * 1.8;
 
-                double[] radPoint1 = new double[2] {
-                                    createVector(pDir + 90, lengthToPoint)[0] + pCoordinates[0],
-                                    createVector(pDir + 90, lengthToPoint)[1] + pCoordinates[1] };
+                double[,] radPoints = pursuiter.getRadiusPoints();
 
-                double[] radPoint2 = new double[2] {
-                                    createVector(pDir - 90, lengthToPoint)[0] + pCoordinates[0],
-                                    createVector(pDir - 90, lengthToPoint)[1] + pCoordinates[1] };
-
-                double[] vectorToPoint1 = { radPoint1[0] - coordinates[0], radPoint1[1] - coordinates[1] };
-                double[] vectorToPoint2 = { radPoint2[0] - coordinates[0], radPoint2[0] - coordinates[0] };
+                double[] vectorToPoint1 = { radPoints[0, 0] - coordinates[0], radPoints[0, 1] - coordinates[1] };
+                double[] vectorToPoint2 = { radPoints[1, 0] - coordinates[0], radPoints[1, 1] - coordinates[0] };
 
 
                 if (modOfVector(vectorToPoint1) <= modOfVector(vectorToPoint2) || numOfRadCircle == 1) {
                     //двигаемся к radPoint1
                     numOfRadCircle = 1;
-                    wantedPoint = radPoint1;
+                    wantedPoint = new double[2] {radPoints[0,0], radPoints[0, 1] };
                 }
                 //двигаемся к radPoint2
                 else {
                     numOfRadCircle = 2;
-                    wantedPoint = radPoint2;
+                    wantedPoint = new double[2] { radPoints[1, 0], radPoints[1, 1] };
                 }
             }
         }
