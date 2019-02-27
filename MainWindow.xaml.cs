@@ -200,18 +200,12 @@ namespace Diplom_main {
             game.E_Player.createSpeedVector(Convert.ToDouble(fixSeparator(E_InputSpeedVectorDirection.Text)),
                 Convert.ToDouble(fixSeparator(E_InputSpeedVectorLength.Text)));
 
-            //game.E_Player.setSpeedVectorDirection(Convert.ToDouble(fixSeparator(E_InputSpeedVectorDirection.Text)));
-            //game.E_Player.setSpeedVectorLength(Convert.ToDouble(fixSeparator(E_InputSpeedVectorLength.Text)));
-
             game.E_Player.setRadius(Convert.ToDouble(fixSeparator(E_inputRadius.Text)));
 
             game.P_Player.setXCoordinate(Convert.ToDouble(P_InputXCoordinate.Text));
             game.P_Player.setYCoordinate(Convert.ToDouble(P_InputYCoordinate.Text));
             game.P_Player.createSpeedVector(Convert.ToDouble(fixSeparator(P_InputSpeedVectorDirection.Text)),
                 Convert.ToDouble(fixSeparator(P_InputSpeedVectorLength.Text)));
-
-            //game.P_Player.setSpeedVectorDirection(Convert.ToDouble(fixSeparator(P_InputSpeedVectorDirection.Text)));
-            //game.P_Player.setSpeedVectorLength(Convert.ToDouble(fixSeparator(P_InputSpeedVectorLength.Text)));
 
             game.P_Player.setRadius(Convert.ToDouble(fixSeparator(P_inputRadius.Text)));
 
@@ -243,21 +237,5 @@ namespace Diplom_main {
                 }
             }
         }
-        /*private static bool isCorrectInt(string inputData, int min = -99999, int max = 99999) {
-            int resultNum;
-            if (!int.TryParse(inputData, out resultNum)) return false;
-            if (resultNum <= min || resultNum >= max) return false;
-            return true;
-        }*/
-        /*private static bool isCorrectDouble(string inputData, int min = -99999, int max = 99999) {
-
-            double resultNum;
-
-            if (!double.TryParse(inputData, out resultNum)) return false;
-
-            if (resultNum <= min || resultNum >= max) return false;
-
-            return true;
-        }*/
     }
 }
