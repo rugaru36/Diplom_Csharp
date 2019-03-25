@@ -94,8 +94,8 @@ namespace Diplom_main {
             double[] buffVector2 = { radCenterPoints[1,0] - E_Player.getCoordinates()[0],
                                     radCenterPoints[1,1] - E_Player.getCoordinates()[1]};
 
-            bool isInFirstRad = Calculations.modOfVector(buffVector1) < P_Player.getRadius() * 0.8;
-            bool isInSecondRad = Calculations.modOfVector(buffVector2) < P_Player.getRadius() * 0.8;
+            bool isInFirstRad = Functions.modOfVector(buffVector1) < P_Player.getRadius() * 0.8;
+            bool isInSecondRad = Functions.modOfVector(buffVector2) < P_Player.getRadius() * 0.8;
 
             return isInFirstRad || isInSecondRad;
         }

@@ -9,15 +9,6 @@ namespace Diplom_main {
 
         public const double PI = 3.14159265358979323846;
 
-        //поворот вектора скорости
-        public static double[] turnVector(double degAngle, ref double[] inputVector) {
-            double radAngle = degToRad(degAngle);
-
-            double buff1 = inputVector[0] * Math.Cos(radAngle) + inputVector[1] * Math.Sin(radAngle);
-            double buff2 = inputVector[1] * Math.Cos(radAngle) - inputVector[0] * Math.Sin(radAngle);
-
-            return new double[] { buff1, buff2 };
-        }
         //создание вектора
         public static double[] createVector(double degAngle, double length) {
             double[] result = new double[2];

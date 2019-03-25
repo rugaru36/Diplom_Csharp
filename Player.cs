@@ -25,12 +25,12 @@ namespace Diplom_main {
 
             double[,] result = new double[2, 2];
             double[] radPoint1 = new double[2] {
-                    Calculations.createVector(getSpeedDirection() + 90, radius*lengthToPointCoeff)[0] + coordinates[0],
-                    Calculations.createVector(getSpeedDirection() + 90, radius*lengthToPointCoeff)[1] + coordinates[1] };
+                    Functions.createVector(getSpeedDirection() + 90, radius*lengthToPointCoeff)[0] + coordinates[0],
+                    Functions.createVector(getSpeedDirection() + 90, radius*lengthToPointCoeff)[1] + coordinates[1] };
 
             double[] radPoint2 = new double[2] {
-                    Calculations.createVector(getSpeedDirection() + 90, radius*lengthToPointCoeff)[0] + coordinates[0],
-                    Calculations.createVector(getSpeedDirection() + 90, radius*lengthToPointCoeff)[1] + coordinates[1] };
+                    Functions.createVector(getSpeedDirection() + 90, radius*lengthToPointCoeff)[0] + coordinates[0],
+                    Functions.createVector(getSpeedDirection() + 90, radius*lengthToPointCoeff)[1] + coordinates[1] };
 
             result[0, 0] = radPoint1[0];
             result[0, 1] = radPoint1[1];
@@ -44,14 +44,14 @@ namespace Diplom_main {
             double[] JVector = {wantedPoint[0] - coordinates[0],
                                 wantedPoint[1] - coordinates[1]};
 
-            double wantedDirection = Calculations.getAngle(JVector);
+            double wantedDirection = Functions.getAngle(JVector);
 
             //безынерционный объект
             if (!getIsInerted()) setSpeedVectorDirection(wantedDirection);
 
             //инерция
             else if (getIsInerted()) {
-                double currentDirection = Calculations.getAngle(speedVector);
+                double currentDirection = Functions.getAngle(speedVector);
 
                 if (currentDirection > 180) currentDirection -= 360;
 
@@ -79,10 +79,10 @@ namespace Diplom_main {
             return radius;
         }
         public double getSpeedVectorLength() {
-            return Calculations.modOfVector(speedVector);
+            return Functions.modOfVector(speedVector);
         }
         public double getSpeedDirection() {
-            return Calculations.getAngle(speedVector);
+            return Functions.getAngle(speedVector);
         }
         public double[] getCoordinates() {
             return coordinates;
@@ -99,19 +99,19 @@ namespace Diplom_main {
             radius = newRadius;
 
             if (radius > 0) {
-                maxAngle = Calculations.modOfVector(speedVector) / radius;
+                maxAngle = Functions.modOfVector(speedVector) / radius;
             }
 
         }
         public void setSpeedVectorLength(double newSpeed) {
-            speedVector = Calculations.createVector(getSpeedDirection(), newSpeed);
+            speedVector = Functions.createVector(getSpeedDirection(), newSpeed);
             if (radius > 0) {
                 maxAngle = newSpeed / radius;
                 return;
             }
         }
         public void setSpeedVectorDirection(double newDirection) {
-            speedVector = Calculations.createVector(newDirection, Calculations.modOfVector(speedVector));
+            speedVector = Functions.createVector(newDirection, Functions.modOfVector(speedVector));
         }
         public void setXCoordinate(double newXCoordinate) {
             this.coordinates[0] = newXCoordinate;
@@ -120,7 +120,7 @@ namespace Diplom_main {
             this.coordinates[1] = newYCoordinate;
         }
         public void createSpeedVector(double direction, double speed) {
-            speedVector = Calculations.createVector(direction, speed);
+            speedVector = Functions.createVector(direction, speed);
 
             if (radius == 0) {
                 maxAngle = 0;
