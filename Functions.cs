@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Diplom_main {
-    static class Calculations {
+    static class Functions {
 
         public const double PI = 3.14159265358979323846;
 
