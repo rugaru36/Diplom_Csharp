@@ -45,17 +45,19 @@ namespace Diplom_main {
 
             else return new double[] { 0, 0 };
         }
-        //статические вспомогательные функции
+
         public static double modOfVector(double[] vector) {
             return Math.Sqrt(Math.Pow(vector[0], 2) + Math.Pow(vector[1], 2));
         }
+
         public static double radToDeg(double rad) {
             return (rad * 180) / PI;
         }
+
         public static double degToRad(double deg) {
             return (PI * deg) / 180;
         }
-        //возвращает положительный угол в градусах
+
         public static double getAngle(double[] vector) {
 
             if (vector[0] > 0 && vector[1] > 0) { //первая четверть
