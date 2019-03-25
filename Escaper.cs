@@ -22,7 +22,7 @@ namespace Diplom_main {
             };
 
             //Если далеко - убегающий бежит прямо
-            if (Functions.modOfVector(LVector) > 10) {
+            if (VectorFunctions.modOfVector(LVector) > 10) {
                 return new double[2] {
                     coordinates[0] + speedVector[0],
                     coordinates[1] + speedVector[1]
@@ -30,7 +30,7 @@ namespace Diplom_main {
             }
 
             //средняя дистанция
-            else if (Functions.modOfVector(LVector) <= 10 && Functions.modOfVector(LVector) > pRadius / 2) {
+            else if (VectorFunctions.modOfVector(LVector) <= 10 && VectorFunctions.modOfVector(LVector) > pRadius / 2) {
                 return new double[2] {
                     coordinates[0] + LVector[0],
                     coordinates[1] + LVector[1]
@@ -38,7 +38,7 @@ namespace Diplom_main {
             }
 
             //близкая дистанция
-            else if (Functions.modOfVector(LVector) <= pRadius / 2) {
+            else if (VectorFunctions.modOfVector(LVector) <= pRadius / 2) {
                 //расстояние от координат преследователя до искомой точки
                 double lengthToPoint = pRadius * 1.8;
 
@@ -47,7 +47,7 @@ namespace Diplom_main {
                 double[] toPoint1 = { radPoints[0, 0] - coordinates[0], radPoints[0, 1] - coordinates[1] };
                 double[] toPoint2 = { radPoints[1, 0] - coordinates[0], radPoints[1, 1] - coordinates[0] };
 
-                bool firstIsCloser = Functions.modOfVector(toPoint1) <= Functions.modOfVector(toPoint2);
+                bool firstIsCloser = VectorFunctions.modOfVector(toPoint1) <= VectorFunctions.modOfVector(toPoint2);
 
                 if (firstIsCloser || numOfRadCircle == 1) {
                     //двигаемся к radPoint1

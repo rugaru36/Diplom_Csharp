@@ -5,11 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Diplom_main {
-    static class Functions {
+    static class VectorFunctions {
 
         public const double PI = 3.14159265358979323846;
 
-        //создание вектора
         public static double[] createVector(double degAngle, double length) {
             double[] result = new double[2];
 
@@ -50,15 +49,7 @@ namespace Diplom_main {
             return Math.Sqrt(Math.Pow(vector[0], 2) + Math.Pow(vector[1], 2));
         }
 
-        public static double radToDeg(double rad) {
-            return (rad * 180) / PI;
-        }
-
-        public static double degToRad(double deg) {
-            return (PI * deg) / 180;
-        }
-
-        public static double getAngle(double[] vector) {
+        public static double getVectorDirection(double[] vector) {
 
             if (vector[0] > 0 && vector[1] > 0) { //первая четверть
                 return radToDeg(Math.Asin(Math.Abs(vector[1]) / modOfVector(vector)));
@@ -85,6 +76,13 @@ namespace Diplom_main {
                 return radToDeg(PI);
             }
             else return 0;
+        }
+
+        private static double radToDeg(double rad) {
+            return (rad * 180) / PI;
+        }
+        private static double degToRad(double deg) {
+            return (PI * deg) / 180;
         }
     }
 }
