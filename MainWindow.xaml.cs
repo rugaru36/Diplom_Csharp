@@ -18,14 +18,13 @@ namespace Diplom_main {
 
     public partial class MainWindow : Window {
 
-        //ПОЛЯ
         private string oldValue = "";
         private bool isDataCorrect = true;
         private string errorMessage = "";
         private Game game;
-        private int graphLeft, graphRight, graphBottom, graphTop, /*graphMiddle_y,*/ graphHeight, graphWidth;
+        private int graphLeft, graphRight, graphBottom, graphTop, graphHeight, graphWidth;
         private Polyline p_line, e_line;
-        //МЕТОДЫ
+
 
         public MainWindow() {
             InitializeComponent();
@@ -197,18 +196,14 @@ namespace Diplom_main {
 
             game.E_Player.setXCoordinate(Convert.ToDouble(fixSeparator(E_InputXCoordinate.Text)));
             game.E_Player.setYCoordinate(Convert.ToDouble(fixSeparator(E_InputYCoordinate.Text)));
-            game.E_Player.createSpeedVector(Convert.ToDouble(fixSeparator(E_InputSpeedVectorDirection.Text)),
-                Convert.ToDouble(fixSeparator(E_InputSpeedVectorLength.Text)));
-
-            
-
+            game.E_Player.setSpeedVectorDirection(Convert.ToDouble(fixSeparator(E_InputSpeedVectorDirection.Text)));
+            game.E_Player.setSpeedVectorLength(Convert.ToDouble(fixSeparator(E_InputSpeedVectorLength.Text)));
             game.E_Player.setRadius(Convert.ToDouble(fixSeparator(E_inputRadius.Text)));
 
             game.P_Player.setXCoordinate(Convert.ToDouble(P_InputXCoordinate.Text));
             game.P_Player.setYCoordinate(Convert.ToDouble(P_InputYCoordinate.Text));
-            game.P_Player.createSpeedVector(Convert.ToDouble(fixSeparator(P_InputSpeedVectorDirection.Text)),
-                Convert.ToDouble(fixSeparator(P_InputSpeedVectorLength.Text)));
-
+            game.P_Player.setSpeedVectorDirection(Convert.ToDouble(fixSeparator(P_InputSpeedVectorDirection.Text)));
+            game.P_Player.setSpeedVectorLength(Convert.ToDouble(fixSeparator(P_InputSpeedVectorLength.Text)));
             game.P_Player.setRadius(Convert.ToDouble(fixSeparator(P_inputRadius.Text)));
 
             game.setIterations(Convert.ToInt32(Game_InputIterations.Text));

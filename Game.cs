@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace Diplom_main {
     class Game {
-        /*ПОЛЯ*/
+
         private int iterationsQuantity;
         private double stepSize = 0.01, accuracy = 0.1;
         public Pursuiter P_Player;
         public Escaper E_Player;
 
-        //списки для построения графиков
+        //для построения графиков
         public CoordinatesList E_PlayerCoordinatesList;
         public CoordinatesList P_PlayerCoordinatesList;
         public double min_x, max_x, min_y, max_y;
 
-        /*МЕТОДЫ*/
+        //конструктор
         public Game() {
             E_Player = new Escaper();
             P_Player = new Pursuiter();

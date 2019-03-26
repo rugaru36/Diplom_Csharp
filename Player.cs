@@ -9,13 +9,13 @@ namespace Diplom_main {
     abstract class Player {
 
         //поля
-        protected Vector speedVector;
+        protected Vector speedVector = new Vector();
         protected double[] coordinates = new double[2];
         protected double[] wantedPoint = new double[2];
         protected double radius = 0, maxAngle = 0;
         protected bool isInerted = false;
 
-        //public методы игры
+        //методы игры
         public void makeNextMove(double stepSize, Player opponent) {
             moveToWantedPoint(stepSize, getNextWantedPoint(opponent));
         }

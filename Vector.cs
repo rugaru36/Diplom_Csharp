@@ -9,15 +9,23 @@ namespace Diplom_main {
 
         public const double PI = 3.14159265358979323846;
 
+        private double length, direction;
+        private double[] coordinates;
+
         public Vector(double inputLength, double inputDirection) {
             length = inputLength;
             direction = inputDirection;
             calculateCoordinates();
         }
         public Vector(double[] beginPoint, double[] endPoint) {
-            coordinates = new double[] { endPoint[0] - beginPoint[0], endPoint[1] - beginPoint[1] };
+            setCoordinates(new double[] { endPoint[0] - beginPoint[0], endPoint[1] - beginPoint[1] });
             calculateModOfVector();
             calculateVectorDirection();
+        }
+        public Vector() {
+            setDirection(0);
+            setCoordinates(new double[] { 0, 0 });
+            setLength(0);
         }
 
         public double getLength() {
@@ -41,9 +49,6 @@ namespace Diplom_main {
         public void setCoordinates(double[] value) {
             coordinates = value;
         }
-
-        private double length, direction;
-        private double[] coordinates;
 
         private void calculateCoordinates() {
 
