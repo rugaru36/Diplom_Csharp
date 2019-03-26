@@ -20,7 +20,6 @@ namespace Diplom_main {
             calculateVectorDirection();
         }
 
-
         public double getLength() {
             return length;
         }

@@ -9,7 +9,6 @@ namespace Diplom_main {
     abstract class Player {
 
         //поля
-
         protected Vector speedVector;
         protected double[] coordinates = new double[2];
         protected double[] wantedPoint = new double[2];

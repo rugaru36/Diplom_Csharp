@@ -56,7 +56,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Vector.cs" />
-    <Compile Include="VectorFunctions.cs" />
     <Compile Include="CoordinatesList.cs" />
     <Compile Include="ListElement.cs" />
     <Compile Include="Pursuiter.cs" />
