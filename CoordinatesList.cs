@@ -35,8 +35,8 @@ namespace Diplom_main {
             tailElement = newElement;
         }
         public void normalizeCoordinates(int width, int height,
-                                         double commonMin_x, double commonMin_y,
-                                         double commonMax_x, double commonMax_y) {
+                                        double commonMin_x, double commonMin_y,
+                                        double commonMax_x, double commonMax_y) {
 
             double whatToAdd_x = 0, whatToAdd_y = 0, whatToMultiply = 1;
             ListElement currentElement = headElement;

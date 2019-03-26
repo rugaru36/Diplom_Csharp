@@ -16,38 +16,40 @@ namespace Diplom_main {
             double pSpeed = pursuiter.getSpeedVectorLength();
             double[] pCoordinates = pursuiter.getCoordinates();
 
-            double[] LVector = new double[2] {
-                coordinates[0] - pCoordinates[0],
-                coordinates[1] - pCoordinates[1]
-            };
+            Vector LVector = new Vector(pCoordinates, coordinates);
 
             //Если далеко - убегающий бежит прямо
-            if (VectorFunctions.modOfVector(LVector) > 10) {
+            if (LVector.getLength() > 10) {
                 return new double[2] {
-                    coordinates[0] + speedVector[0],
-                    coordinates[1] + speedVector[1]
+                    coordinates[0] + speedVector.getCoordinates()[0],
+                    coordinates[1] + speedVector.getCoordinates()[1]
                 };
             }
 
             //средняя дистанция
-            else if (VectorFunctions.modOfVector(LVector) <= 10 && VectorFunctions.modOfVector(LVector) > pRadius / 2) {
+            else if (LVector.getLength() <= 10 && LVector.getLength() > pRadius / 2) {
                 return new double[2] {
-                    coordinates[0] + LVector[0],
-                    coordinates[1] + LVector[1]
+                    coordinates[0] + LVector.getCoordinates()[0],
+                    coordinates[1] + LVector.getCoordinates()[1]
                 };
             }
 
             //близкая дистанция
-            else if (VectorFunctions.modOfVector(LVector) <= pRadius / 2) {
+            else if (LVector.getLength() <= pRadius / 2) {
                 //расстояние от координат преследователя до искомой точки
                 double lengthToPoint = pRadius * 1.8;
 
                 double[,] radPoints = pursuiter.getRadiusPoints();
 
-                double[] toPoint1 = { radPoints[0, 0] - coordinates[0], radPoints[0, 1] - coordinates[1] };
-                double[] toPoint2 = { radPoints[1, 0] - coordinates[0], radPoints[1, 1] - coordinates[0] };
+                double[] point1 = { radPoints[0, 0], radPoints[0, 1] };
+                double[] point2 = { radPoints[1, 0], radPoints[1, 1] };
 
-                bool firstIsCloser = VectorFunctions.modOfVector(toPoint1) <= VectorFunctions.modOfVector(toPoint2);
+
+                Vector toPoint1 = new Vector(coordinates, point1);
+                Vector toPoint2 = new Vector(coordinates, point2);
+
+
+                bool firstIsCloser = LVector.getLength() <= toPoint2.getLength();
 
                 if (firstIsCloser || numOfRadCircle == 1) {
                     //двигаемся к radPoint1

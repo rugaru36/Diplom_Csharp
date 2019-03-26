@@ -67,7 +67,7 @@
                 LostFocus="checkInputDataTypes" TextAlignment="Justify"/>
         <TextBox x:Name="E_InputYCoordinate"
                 HorizontalAlignment="Left" Height="22" Margin="336,53,0,0"
-                TextWrapping="Wrap" Text="13" VerticalAlignment="Top" Width="70" FontSize="14"
+                TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="70" FontSize="14"
                 GotFocus="setPrevValue"
                 LostFocus="checkInputDataTypes"/>
         <TextBox x:Name="E_InputSpeedVectorLength" HorizontalAlignment="Left" 
