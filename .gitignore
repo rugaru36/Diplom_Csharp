@@ -9,6 +9,10 @@
 *.user
 *.userosscache
 *.sln.docstates
+*.exe
+*.config
+*.pdb
+
 
 bin/
 obj/
