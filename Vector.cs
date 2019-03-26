@@ -18,13 +18,13 @@ namespace Diplom_main {
             calculateCoordinates();
         }
         public Vector(double[] beginPoint, double[] endPoint) {
-            setCoordinates(new double[] { endPoint[0] - beginPoint[0], endPoint[1] - beginPoint[1] });
+            coordinates = new double[] { endPoint[0] - beginPoint[0], endPoint[1] - beginPoint[1] };
             calculateModOfVector();
             calculateVectorDirection();
         }
         public Vector() {
+            coordinates = new double[] { 0, 0 };
             setDirection(0);
-            setCoordinates(new double[] { 0, 0 });
             setLength(0);
         }
 
@@ -45,9 +45,6 @@ namespace Diplom_main {
         public void setLength(double value) {
             length = value;
             calculateCoordinates();
-        }
-        public void setCoordinates(double[] value) {
-            coordinates = value;
         }
 
         private void calculateCoordinates() {

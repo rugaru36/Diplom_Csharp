@@ -1,8 +1,8 @@
 ﻿using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 
 namespace Diplom_main {
@@ -115,19 +115,10 @@ namespace Diplom_main {
             speedVector.setDirection(newDirection);
         }
         public void setXCoordinate(double newXCoordinate) {
-            this.coordinates[0] = newXCoordinate;
+            coordinates[0] = newXCoordinate;
         }
         public void setYCoordinate(double newYCoordinate) {
-            this.coordinates[1] = newYCoordinate;
-        }
-        public void createSpeedVector(double direction, double speed) {
-            speedVector = new Vector(speed, direction);
-
-            if (radius == 0) {
-                maxAngle = 0;
-                return;
-            }
-            maxAngle = speed / radius;
+            coordinates[1] = newYCoordinate;
         }
     }
 }
