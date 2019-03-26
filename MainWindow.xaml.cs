@@ -200,6 +200,8 @@ namespace Diplom_main {
             game.E_Player.createSpeedVector(Convert.ToDouble(fixSeparator(E_InputSpeedVectorDirection.Text)),
                 Convert.ToDouble(fixSeparator(E_InputSpeedVectorLength.Text)));
 
+            
+
             game.E_Player.setRadius(Convert.ToDouble(fixSeparator(E_inputRadius.Text)));
 
             game.P_Player.setXCoordinate(Convert.ToDouble(P_InputXCoordinate.Text));

@@ -29,9 +29,9 @@ namespace Diplom_main {
             P_PlayerCoordinatesList = new CoordinatesList();
 
             min_x = P_Player.getCoordinates()[0];
-            max_x = P_Player.getCoordinates()[0];
+            max_x = min_x;
             min_y = P_Player.getCoordinates()[1];
-            max_y = P_Player.getCoordinates()[1];
+            max_y = min_y;
 
             for (int i = 0; i < iterationsQuantity; i++) {
 
@@ -61,7 +61,6 @@ namespace Diplom_main {
                 P_Player.makeNextMove(stepSize, E_Player);
                 E_Player.makeNextMove(stepSize, P_Player);
 
-
                 if (isEscaperCaught()) {
                     return "Убегающий был пойман \nКоличество итераций: " + i.ToString();
                 }
@@ -72,6 +71,7 @@ namespace Diplom_main {
             }
             return "Время погони вышло";
         }
+
         //сеттеры
         public void setStepSize(double newSize) {
             this.stepSize = newSize;
@@ -88,23 +88,22 @@ namespace Diplom_main {
 
             double[,] radCenterPoints = P_Player.getRadiusPoints();
 
-            double[] buffVector1 = { radCenterPoints[0,0] - E_Player.getCoordinates()[0],
-                                    radCenterPoints[0,1] - E_Player.getCoordinates()[1]};
+            double[] point1 = new double[] { radCenterPoints[0, 0], radCenterPoints[0, 1] };
+            double[] point2 = new double[] { radCenterPoints[1, 0], radCenterPoints[1, 1] };
 
-            double[] buffVector2 = { radCenterPoints[1,0] - E_Player.getCoordinates()[0],
-                                    radCenterPoints[1,1] - E_Player.getCoordinates()[1]};
+            Vector buffVector1 = new Vector(point1, E_Player.getCoordinates());
 
-            bool isInFirstRad = VectorFunctions.modOfVector(buffVector1) < P_Player.getRadius() * 0.8;
-            bool isInSecondRad = VectorFunctions.modOfVector(buffVector2) < P_Player.getRadius() * 0.8;
+            Vector buffVector2 = new Vector(point2, E_Player.getCoordinates());
+
+            bool isInFirstRad = buffVector1.getLength() < P_Player.getRadius() * 0.8;
+            bool isInSecondRad = buffVector2.getLength() < P_Player.getRadius() * 0.8;
 
             return isInFirstRad || isInSecondRad;
         }
         private bool isEscaperCaught() {
-            double LVector = Math.Sqrt(Math.Pow(this.E_Player.getCoordinates()[0] -
-            this.P_Player.getCoordinates()[0], 2) + Math.Pow(this.E_Player.getCoordinates()[1] -
-            this.P_Player.getCoordinates()[1], 2));
+            Vector LVector = new Vector(this.E_Player.getCoordinates(), this.P_Player.getCoordinates());
 
-            return LVector < accuracy;
+            return LVector.getLength() < accuracy;
         }
     }
 }
