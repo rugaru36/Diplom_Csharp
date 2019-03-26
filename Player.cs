@@ -24,8 +24,8 @@ namespace Diplom_main {
 
             double[,] result = new double[2, 2];
 
-            Vector toPoint1 = new Vector(getSpeedDirection() + 90, radius * lengthToPointCoeff);
-            Vector toPoint2 = new Vector(getSpeedDirection() - 90, radius * lengthToPointCoeff);
+            Vector toPoint1 = new Vector(radius * lengthToPointCoeff, getSpeedDirection() + 90);
+            Vector toPoint2 = new Vector(radius * lengthToPointCoeff, getSpeedDirection() - 90);
 
             double[] radPoint1 = new double[2] {
                     toPoint1.getCoordinates()[0] + coordinates[0],

@@ -92,7 +92,6 @@ namespace Diplom_main {
             double[] point2 = new double[] { radCenterPoints[1, 0], radCenterPoints[1, 1] };
 
             Vector buffVector1 = new Vector(point1, E_Player.getCoordinates());
-
             Vector buffVector2 = new Vector(point2, E_Player.getCoordinates());
 
             bool isInFirstRad = buffVector1.getLength() < P_Player.getRadius() * 0.8;

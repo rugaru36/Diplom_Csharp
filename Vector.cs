@@ -52,28 +52,26 @@ namespace Diplom_main {
                 else direction -= 360;
             }
 
-
             //первая четверть
             if (direction >= 0 && direction <= 90)
-                coordinates = new double[] { Math.Sin(degToRad(90 - direction)) * length,
+                coordinates = new double[] {
+                                Math.Sin(degToRad(90 - direction)) * length,
                                 Math.Sin(degToRad(direction)) * length };
-
             //вторая четверть
             else if (direction > 90 && direction < 180)
                 coordinates = new double[] {
-                    Math.Sin(degToRad(-90 - direction)) * length * (-1),
-                    Math.Sin(degToRad((180 - direction))) * length};
+                                Math.Sin(degToRad(-90 - direction)) * length * (-1),
+                                Math.Sin(degToRad((180 - direction))) * length};
             //третья четверть
             else if (direction >= 180 && direction <= 270)
                 coordinates = new double[] {
-                    Math.Sin(degToRad(-90 - direction)) * length * (-1),
-                    Math.Sin(degToRad((direction - 180))) * length * (-1)
-                };
+                                Math.Sin(degToRad(-90 - direction)) * length * (-1),
+                                Math.Sin(degToRad((direction - 180))) * length * (-1)};
             //четвертая четверть
             else if (direction > 270 && direction < 360)
                 coordinates = new double[] {
-                    Math.Sin(degToRad(90 - direction)) * length,
-                    Math.Sin(degToRad((360 - direction))) * length * (-1)
+                                Math.Sin(degToRad(90 - direction)) * length,
+                                Math.Sin(degToRad((360 - direction))) * length * (-1)
                 };
 
             else coordinates = new double[] { 0, 0 };
@@ -82,7 +80,6 @@ namespace Diplom_main {
             length = Math.Sqrt(Math.Pow(coordinates[0], 2) + Math.Pow(coordinates[1], 2));
         }
         private void calculateVectorDirection() {
-
             if (coordinates[0] > 0 && coordinates[1] > 0) { //первая четверть
                 direction = radToDeg(Math.Asin(Math.Abs(coordinates[1]) / length));
             }
