@@ -11,15 +11,15 @@ namespace Diplom_main {
         //поля
         protected Vector speedVector = new Vector();
         protected double[] coordinates = new double[2];
-        protected double[] wantedPoint = new double[2];
+        protected double[] wantedPoint = new double[2] { 9, 9 };
         protected double radius = 0, maxAngle = 0;
         protected bool isInerted = false;
 
         //методы игры
         public void makeNextMove(double stepSize, Player opponent) {
-            moveToWantedPoint(stepSize, getNextWantedPoint(opponent));
+            getNextWantedPoint(opponent);
+            moveToWantedPoint(stepSize);
         }
-        public abstract double[] getNextWantedPoint(Player opponent);
         public double[][] getRadiusPoints(double lengthToPointCoeff = 1) {
 
             double[][] result = new double[2][];
@@ -40,7 +40,8 @@ namespace Diplom_main {
 
             return result;
         }
-        private void moveToWantedPoint(double stepSize, double[] wantedPoint) {
+        protected abstract void getNextWantedPoint(Player opponent);
+        private void moveToWantedPoint(double stepSize) {
 
             Vector jVector = new Vector(coordinates, wantedPoint);
 

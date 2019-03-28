@@ -9,7 +9,7 @@ namespace Diplom_main {
 
         private byte numOfRadCircle = 0;
 
-        public override double[] getNextWantedPoint(Player pursuiter) {
+        protected override void getNextWantedPoint(Player pursuiter) {
 
             double pRadius = pursuiter.getRadius();
             double pDir = pursuiter.getSpeedDirection();
@@ -20,7 +20,7 @@ namespace Diplom_main {
 
             //Если далеко - убегающий бежит прямо
             if (LVector.getLength() > 10) {
-                return new double[2] {
+                wantedPoint = new double[2] {
                     coordinates[0] + speedVector.getCoordinates()[0],
                     coordinates[1] + speedVector.getCoordinates()[1]
                 };
@@ -28,7 +28,7 @@ namespace Diplom_main {
 
             //средняя дистанция
             else if (LVector.getLength() <= 10 && LVector.getLength() > pRadius / 2) {
-                return new double[2] {
+                wantedPoint = new double[2] {
                     coordinates[0] + LVector.getCoordinates()[0],
                     coordinates[1] + LVector.getCoordinates()[1]
                 };
@@ -46,14 +46,13 @@ namespace Diplom_main {
 
                 if (firstIsCloser || numOfRadCircle == 1) {
                     numOfRadCircle = 1;
-                    return radPoints[0];
+                    wantedPoint = radPoints[0];
                 }
                 else {
                     numOfRadCircle = 2;
-                    return radPoints[1];
+                    wantedPoint = radPoints[1];
                 }
             }
-            return new double[] { 0, 0 };
         }
     }
 }
