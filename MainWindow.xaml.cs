@@ -82,6 +82,8 @@ namespace Diplom_main {
                 current_ePoint = current_ePoint.next;
             }
 
+            game.E_PlayerCoordinatesList.clearList();
+            game.P_PlayerCoordinatesList.clearList();
         }
         private void checkInputData() {
             this.isDataCorrect = true;

@@ -68,5 +68,9 @@ namespace Diplom_main {
                 currentElement = currentElement.next;
             }
         }
+        
+        public void clearList() {
+            headElement.next = null;
+        }
     }
 }
