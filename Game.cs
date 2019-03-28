@@ -36,7 +36,7 @@ namespace Diplom_main {
             for (int i = 0; i < iterationsQuantity; i++) {
 
                 //для построения графиков
-                if (i % 5 == 0 || i == iterationsQuantity - 1 || isEscaperInRadCurcle() || isEscaperCaught()) {
+                if (i % 5 == 0 || i == iterationsQuantity - 1 || isEscaperInRadius() || isEscaperCaught()) {
                     P_PlayerCoordinatesList.addElement(new double[] {
                         P_Player.getCoordinates()[0], P_Player.getCoordinates()[1] });
 
@@ -65,11 +65,12 @@ namespace Diplom_main {
                     return "Убегающий был пойман \nКоличество итераций: " + i.ToString();
                 }
 
-                else if (isEscaperInRadCurcle()) {
+                else if (isEscaperInRadius()) {
                     return "Убегающий забежал в радиус! \nКоличество итераций: " + i.ToString();
                 }
             }
-            return "Время погони вышло";
+            Vector LVector = new Vector(E_Player.getCoordinates(), P_Player.getCoordinates());
+            return "Время погони вышло! \nИтоговое расстояние: " + LVector.getLength().ToString();
         }
 
         //сеттеры
@@ -82,14 +83,14 @@ namespace Diplom_main {
         public void setIterations(int newIter) {
             this.iterationsQuantity = newIter;
         }
-        private bool isEscaperInRadCurcle() {
+        private bool isEscaperInRadius() {
 
             if (!P_Player.getIsInerted()) return false;
 
-            double[,] radCenterPoints = P_Player.getRadiusPoints();
+            double[][] radCenterPoints = P_Player.getRadiusPoints();
 
-            double[] point1 = new double[] { radCenterPoints[0, 0], radCenterPoints[0, 1] };
-            double[] point2 = new double[] { radCenterPoints[1, 0], radCenterPoints[1, 1] };
+            double[] point1 = new double[] { radCenterPoints[0][0], radCenterPoints[0][1] };
+            double[] point2 = new double[] { radCenterPoints[1][0], radCenterPoints[1][1] };
 
             Vector buffVector1 = new Vector(point1, E_Player.getCoordinates());
             Vector buffVector2 = new Vector(point2, E_Player.getCoordinates());

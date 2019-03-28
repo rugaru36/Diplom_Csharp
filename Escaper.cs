@@ -36,33 +36,23 @@ namespace Diplom_main {
 
             //близкая дистанция
             else if (LVector.getLength() <= pRadius / 2) {
-                //расстояние от координат преследователя до искомой точки
-                double lengthToPoint = pRadius * 1.8;
 
-                double[,] radPoints = pursuiter.getRadiusPoints();
+                double[][] radPoints = pursuiter.getRadiusPoints();
 
-                double[] point1 = { radPoints[0, 0], radPoints[0, 1] };
-                double[] point2 = { radPoints[1, 0], radPoints[1, 1] };
-
-
-                Vector toPoint1 = new Vector(coordinates, point1);
-                Vector toPoint2 = new Vector(coordinates, point2);
-
+                Vector toPoint1 = new Vector(coordinates, radPoints[0]);
+                Vector toPoint2 = new Vector(coordinates, radPoints[1]);
 
                 bool firstIsCloser = LVector.getLength() <= toPoint2.getLength();
 
                 if (firstIsCloser || numOfRadCircle == 1) {
-                    //двигаемся к radPoint1
                     numOfRadCircle = 1;
-                    return new double[2] { radPoints[0, 0], radPoints[0, 1] };
+                    return radPoints[0];
                 }
-                //двигаемся к radPoint2
                 else {
                     numOfRadCircle = 2;
-                    return new double[2] { radPoints[1, 0], radPoints[1, 1] };
+                    return radPoints[1];
                 }
             }
-
             return new double[] { 0, 0 };
         }
     }

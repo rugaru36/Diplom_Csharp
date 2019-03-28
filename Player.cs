@@ -20,9 +20,9 @@ namespace Diplom_main {
             moveToWantedPoint(stepSize, getNextWantedPoint(opponent));
         }
         public abstract double[] getNextWantedPoint(Player opponent);
-        public double[,] getRadiusPoints(double lengthToPointCoeff = 1) {
+        public double[][] getRadiusPoints(double lengthToPointCoeff = 1) {
 
-            double[,] result = new double[2, 2];
+            double[][] result = new double[2][];
 
             Vector toPoint1 = new Vector(radius * lengthToPointCoeff, getSpeedDirection() + 90);
             Vector toPoint2 = new Vector(radius * lengthToPointCoeff, getSpeedDirection() - 90);
@@ -35,10 +35,8 @@ namespace Diplom_main {
                     toPoint2.getCoordinates()[0] + coordinates[0],
                     toPoint2.getCoordinates()[1] + coordinates[1] };
 
-            result[0, 0] = radPoint1[0];
-            result[0, 1] = radPoint1[1];
-            result[1, 0] = radPoint1[0];
-            result[1, 1] = radPoint1[1];
+            result[0] = radPoint1;
+            result[1] = radPoint2;
 
             return result;
         }
@@ -120,5 +118,6 @@ namespace Diplom_main {
         public void setYCoordinate(double newYCoordinate) {
             coordinates[1] = newYCoordinate;
         }
+        
     }
 }
