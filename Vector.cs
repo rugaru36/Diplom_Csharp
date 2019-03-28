@@ -49,32 +49,31 @@ namespace Diplom_main {
 
         private void calculateCoordinates() {
 
+            //получим положительный угол, не больше 360
             while (Math.Abs(direction) >= 360 || direction < 0) {
                 if (direction < 0) direction += 360;
                 else direction -= 360;
             }
-
-            //первая четверть
-            if (direction >= 0 && direction <= 90)
+            
+            if (direction <= 90) //первая четверть
                 coordinates = new double[] {
-                                Math.Sin(degToRad(90 - direction)) * length,
-                                Math.Sin(degToRad(direction)) * length };
-            //вторая четверть
-            else if (direction > 90 && direction < 180)
+                    Math.Sin(degToRad(90 - direction)) * length,
+                    Math.Sin(degToRad(direction)) * length};
+            
+            else if (direction > 90 && direction <= 180) //вторая четверть
                 coordinates = new double[] {
-                                Math.Sin(degToRad(-90 - direction)) * length * (-1),
-                                Math.Sin(degToRad((180 - direction))) * length};
-            //третья четверть
-            else if (direction >= 180 && direction <= 270)
+                    Math.Sin(degToRad(-90 - direction)) * length * (-1),
+                    Math.Sin(degToRad((180 - direction))) * length};
+            
+            else if (direction > 180 && direction <= 270) //третья четверть
                 coordinates = new double[] {
-                                Math.Sin(degToRad(-90 - direction)) * length * (-1),
-                                Math.Sin(degToRad((direction - 180))) * length * (-1)};
-            //четвертая четверть
-            else if (direction > 270 && direction < 360)
+                    Math.Sin(degToRad(-90 - direction)) * length * (-1),
+                    Math.Sin(degToRad((direction - 180))) * length * (-1)};
+            
+            else if (direction > 270) //четвертая четверть
                 coordinates = new double[] {
-                                Math.Sin(degToRad(90 - direction)) * length,
-                                Math.Sin(degToRad((360 - direction))) * length * (-1)
-                };
+                    Math.Sin(degToRad(90 - direction)) * length,
+                    Math.Sin(degToRad((360 - direction))) * length * (-1)};
 
             else coordinates = new double[] { 0, 0 };
         }
@@ -82,32 +81,33 @@ namespace Diplom_main {
             length = Math.Sqrt(Math.Pow(coordinates[0], 2) + Math.Pow(coordinates[1], 2));
         }
         private void calculateVectorDirection() {
-            if (coordinates[0] > 0 && coordinates[1] > 0) { //первая четверть
+            if (coordinates[0] > 0 && coordinates[1] > 0) //первая четверть
                 direction = radToDeg(Math.Asin(Math.Abs(coordinates[1]) / length));
-            }
-            else if (coordinates[0] < 0 && coordinates[1] > 0) { //вторая четверть
+
+            else if (coordinates[0] < 0 && coordinates[1] > 0)  //вторая четверть
                 direction = radToDeg(PI - Math.Asin(Math.Abs(coordinates[1]) / length));
-            }
-            else if (coordinates[0] < 0 && coordinates[1] < 0) { //третья четверть
+
+            else if (coordinates[0] < 0 && coordinates[1] < 0)  //третья четверть
                 direction = radToDeg(PI + Math.Asin(Math.Abs(coordinates[1]) / length));
-            }
-            else if (coordinates[0] > 0 && coordinates[1] < 0) { //четвёртая четверть
+
+            else if (coordinates[0] > 0 && coordinates[1] < 0)  //четвёртая четверть
                 direction = radToDeg(2 * PI - Math.Asin(Math.Abs(coordinates[1]) / length));
-            }
-            else if (coordinates[0] == 0 && coordinates[1] > 0) { // вверх
+
+            else if (coordinates[0] == 0 && coordinates[1] > 0)  // вверх
                 direction = radToDeg(PI / 2);
-            }
-            else if (coordinates[0] == 0 && coordinates[1] < 0) { // вниз
+
+            else if (coordinates[0] == 0 && coordinates[1] < 0)  // вниз
                 direction = radToDeg(PI * 3 / 2);
-            }
-            else if (coordinates[0] > 0 && coordinates[1] == 0) { // вправо
+
+            else if (coordinates[0] > 0 && coordinates[1] == 0)  // вправо
                 direction = 0;
-            }
-            else if (coordinates[0] < 0 && coordinates[1] == 0) { // влево
+
+            else if (coordinates[0] < 0 && coordinates[1] == 0)  // влево
                 direction = radToDeg(PI);
-            }
+
             else direction = 0;
         }
+
         private static double radToDeg(double rad) {
             return (rad * 180) / PI;
         }
