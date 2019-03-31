@@ -19,7 +19,7 @@ namespace Diplom_main {
             Vector LVector = new Vector(pCoordinates, coordinates);
 
             //Если далеко - убегающий бежит прямо
-            if (LVector.getLength() > 10) {
+            if (LVector.getLength() > pRadius * 2) {
                 wantedPoint = new double[2] {
                     coordinates[0] + speedVector.getCoordinates()[0],
                     coordinates[1] + speedVector.getCoordinates()[1]
@@ -27,7 +27,7 @@ namespace Diplom_main {
             }
 
             //средняя дистанция
-            else if (LVector.getLength() <= 10 && LVector.getLength() > pRadius / 2) {
+            else if (LVector.getLength() <= pRadius * 2 && LVector.getLength() > pRadius / 2) {
                 wantedPoint = new double[2] {
                     coordinates[0] + LVector.getCoordinates()[0],
                     coordinates[1] + LVector.getCoordinates()[1]

@@ -8,11 +8,9 @@ namespace Diplom_main {
     class CoordinatesList {
         public ListElement headElement; //начало списка
         public ListElement tailElement; //конец списка
-        int elementsQuantity = 0;
         public double min_x, min_y, max_x, max_y;
 
         public void addElement(double[] data) {
-            elementsQuantity++;
             ListElement newElement = new ListElement(data);
 
             //если список пуст

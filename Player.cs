@@ -52,6 +52,7 @@ namespace Diplom_main {
 
             //инерция
             else if (getIsInerted()) {
+
                 double currentDirection = speedVector.getDirection();
 
                 if (currentDirection > 180) currentDirection -= 360;
